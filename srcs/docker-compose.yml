@@ -1,0 +1,36 @@
+version: '3.0'
+services:
+  nginx:
+    build: ./requirements/nginx/
+    ports:
+      - '443:443'
+    restart: on-failure
+    volumes:
+      - data_wp:/var/www/html/
+    networks:
+      - nat
+  mariadb:
+    build: ./requirements/mariadb/
+    env_file:
+      - .env
+    ports:
+      - '3306:3306'
+    volumes:
+      - data_db:/var/lib/mysql
+    networks:
+      - nat
+    cap_add:
+      - SYS_NICE
+      - NET_ADMIN
+  adminer:
+    image: adminer
+    restart: on-failure
+    ports:
+      - '8080:8080'
+    networks:
+      - nat
+volumes:
+  data_wp:
+  data_db:
+networks:
+  nat:

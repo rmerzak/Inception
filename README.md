@@ -1,1 +1,1 @@
-# WebStackMagic-Dockerized-Web-Infrastructure-
+# WebStack Dockerized Web Infrastructure

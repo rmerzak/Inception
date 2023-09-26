@@ -4,33 +4,44 @@ services:
     build: ./requirements/nginx/
     ports:
       - '443:443'
-    restart: on-failure
+    restart: always
     volumes:
       - data_wp:/var/www/html/
     networks:
-      - nat
+      - inception
   mariadb:
     build: ./requirements/mariadb/
     env_file:
       - .env
+    restart: always
     ports:
       - '3306:3306'
     volumes:
       - data_db:/var/lib/mysql
     networks:
-      - nat
-    cap_add:
-      - SYS_NICE
-      - NET_ADMIN
+      - inception
   adminer:
     image: adminer
-    restart: on-failure
+    restart: always
     ports:
       - '8080:8080'
     networks:
-      - nat
+      - inception
+  wordpress:
+    build: ./requirements/wordpress/
+    env_file:
+      - .env
+    ports:
+      - '9000:9000'
+    volumes:
+      - data_wp:/var/www/wordpress
+    depends_on:
+      - mariadb
+    networks:
+      - inception
 volumes:
   data_wp:
   data_db:
 networks:
-  nat:
+  inception:
+   driver: bridge

@@ -1,28 +1,40 @@
 FROM debian:bullseye
 
-RUN apt-get update && apt-get upgrade
 
-RUN apt-get -y install wget
+RUN apt-get update && apt-get upgrade && apt-get install wget php7.4 php-fpm php-mysql  mariadb-client -y
 
-RUN apt-get install -y php7.3 php-fpm php-mysql mariadb-client
+RUN mkdir -p /var/www/html/wordpress
+
 
 COPY tools/script.sh /tools/script.sh
 
 RUN chmod +x /tools/script.sh
 
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+# RUN mkdir  -p /var/www/html
 
-RUN chmod +x wp-cli.phar
+RUN chown -R root:root /var/www/html/wordpress
 
-RUN mv wp-cli.phar /usr/local/bin/wp
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+RUN chmod 755 /etc/php/7.4/fpm/pool.d/www.conf
 
 RUN mkdir /run/php
 
-RUN mkdir  -p /var/www/html/wordpress
-
 RUN chown -R www-data:www-data /run/php
 
-RUN chown -R root:root /var/www/html/wordpress
+
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+# RUN wget https://wordpress.org/wordpress-6.2.2.tar.gz -P /var/www/html
+# RUN cd /var/www/html && tar -xzf wordpress-6.2.2.tar.gz && rm wordpress-6.2.2.tar.gz
+
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+
+# RUN  wp core download --allow-root
+
+
+
+EXPOSE 9000
 
 ENTRYPOINT [ "/tools/script.sh" ]
 

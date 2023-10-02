@@ -10,5 +10,6 @@ run:
 
 down:
 	docker-compose -f $(compose_file) down
+	docker system prune -f --all --volumes
 
 .PHONY: build run

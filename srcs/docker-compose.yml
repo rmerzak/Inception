@@ -23,6 +23,8 @@ services:
       - data_wp:/var/www/html/wordpress
     networks:
       - inception
+    depends_on:
+      - wordpress
   mariadb:
     build: ./requirements/mariadb/
     container_name: mariadb
@@ -44,7 +46,17 @@ services:
       - inception
 volumes:
   data_wp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/rmerzak/Desktop/inception/srcs/data_wp
   data_db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/rmerzak/Desktop/inception/srcs/data_db
 networks:
   inception:
    driver: bridge

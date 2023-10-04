@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN apt-get update && apt-get upgrade && apt-get install vim net-tools -y
+RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install mariadb-server mariadb-client -y
 

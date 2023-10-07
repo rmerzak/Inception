@@ -38,10 +38,19 @@ services:
     networks:
       - inception
   adminer:
-    image: adminer
+    build: ./requirements/bonus/Adminer
+    container_name: adminer
     restart: always
     ports:
       - '8080:8080'
+    networks:
+      - inception
+  static_site:
+    build: ./requirements/bonus/static_website
+    container_name: static_website
+    restart: always
+    ports:
+      - '80:80'
     networks:
       - inception
 volumes:

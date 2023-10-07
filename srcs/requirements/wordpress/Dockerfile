@@ -30,4 +30,3 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 EXPOSE 9000
 
 ENTRYPOINT [ "/tools/script.sh" ]
-

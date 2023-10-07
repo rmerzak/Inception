@@ -2,18 +2,18 @@
 compose_file=./srcs/docker-compose.yml
 
 build:
-	mkdir -p /Users/rmerzak/Desktop/inception/srcs/data_db
-	mkdir -p /Users/rmerzak/Desktop/inception/srcs/data_wp
-	docker-compose -f $(compose_file) up --build
+	mkdir -p /home/ubuntu/inception/srcs/data_db
+	mkdir -p /home/ubuntu/inception/srcs/data_wp
+	sudo docker-compose -f $(compose_file) up --build -d
 
 run:
-	docker-compose -f $(compose_file) up
+	sudo docker-compose -f $(compose_file) up -d
 
 
 down:
-	docker-compose -f $(compose_file) down
-	docker system prune -f --all --volumes
-	rm -rf /Users/rmerzak/Desktop/inception/srcs/data_db
-	rm -rf /Users/rmerzak/Desktop/inception/srcs/data_wp
+	sudo docker-compose -f $(compose_file) down
+	sudo docker system prune -f --all --volumes
+	sudo rm -rf /home/ubuntu/inception/srcs/data_db
+	sudo rm -rf /home/ubuntu/inception/srcs/data_wp
 
-.PHONY: build run
+.PHONY: build run down

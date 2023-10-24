@@ -59,13 +59,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/ubuntu/inception/srcs/data_wp
+      device: /home/rmerzak/data/data_wp
   data_db:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/ubuntu/inception/srcs/data_db
+      device: /home/rmerzak/data/data_db
 networks:
   inception:
    driver: bridge

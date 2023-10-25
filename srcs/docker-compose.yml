@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     ports:
-      - '9000:9000'
+      - 9000
     volumes:
       - data_wp:/var/www/html/wordpress
     depends_on:
@@ -35,7 +35,7 @@ services:
       - .env
     restart: always
     ports:
-      - '3306:3306'
+      - 3306
     volumes:
       - data_db:/var/lib/mysql
     networks:

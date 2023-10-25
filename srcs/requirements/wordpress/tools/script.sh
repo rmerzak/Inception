@@ -15,7 +15,7 @@ then
 		--admin_user=$WP_USERNAME \
 		--admin_password=$WP_PASSWD \
 		--admin_email=$WP_ADMIN_EMAIL \
-		--url=$DOMAIN_NAME \
+		--url=$WP_URL \
 		--allow-root
 	wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root 
 fi

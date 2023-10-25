@@ -17,6 +17,7 @@ then
 		--admin_email=$WP_ADMIN_EMAIL \
 		--url=$DOMAIN_NAME \
 		--allow-root
+	wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root 
 fi
 
 echo "starting Wordpress"
